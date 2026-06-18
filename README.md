@@ -6,6 +6,20 @@ A full-stack web application for monitoring HTTP/HTTPS endpoint availability. Ad
 
 Uptime Monitor lets operators track whether external sites and APIs are reachable. The backend runs scheduled health checks against registered URLs, persists results, and exposes a REST API. The frontend provides a dashboard to add URLs, view current status (UP/DOWN), response times, and per-URL check history.
 
+## Screenshots
+
+### Monitoring Dashboard
+
+Displays all monitored URLs with their latest status, response time, and last check timestamp.
+
+![Dashboard](./screenshots/dashboard.png)
+
+### Health Check History
+
+Clicking a URL displays the complete health check history including timestamps, status codes, response times, and UP/DOWN status.
+
+![History Modal](./screenshots/history-modal.png)
+
 **Core capabilities**
 
 - Register and validate `http`/`https` URLs
@@ -13,6 +27,8 @@ Uptime Monitor lets operators track whether external sites and APIs are reachabl
 - Status derived from HTTP response codes (UP: 2xx–3xx; DOWN: errors or other codes)
 - Health check history with timestamps, status codes, and response times
 - Docker-based deployment for local and containerized environments
+- Click any monitored URL to view historical health check records
+- Persistent SQLite storage across Docker container restarts
 
 ## Architecture
 
@@ -200,4 +216,3 @@ flowchart TB
 - Build the frontend with `VITE_API_URL` pointing to the public API domain (e.g. `https://api.example.com`).
 - Containerize the backend using the existing `backend/Dockerfile`; configure ECS task definitions with environment variables and RDS connectivity.
 - Run a single ECS service that includes both the API and the background monitor worker (as in the current architecture), or split into separate services if scaling requirements differ.
-# Uptime-monitor
